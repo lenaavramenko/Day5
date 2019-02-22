@@ -18,15 +18,20 @@ public class ConnectionSample {
             String pass = "123456";
 
             //1 - Load the driver
-            Class.forName("com.mysql.jdbc.Driver");
+           // Class.forName("com.mysql.jdbc.Driver");
 
             //2 - Obtain a connection using DriverManager class
             Connection cn = DriverManager.getConnection(url, user, pass);
-            Statement myStatement = cn.createStatement();
-            myStatement.executeQuery("Select * from employee");
+
+
+            Statement myStatement =cn.createStatement();
+            ResultSet rs = myStatement.executeQuery("Select * from employee");
             System.out.println("Connection successfully established! \n");
 
-
+            while(rs.next()) {
+                System.out.print(rs.getInt(1));
+                System.out.println(rs.getString(2));
+            }
             //Closing the connection
             cn.close();
         }catch(Exception e){
